@@ -1,13 +1,9 @@
+import random
 prompt = "~> "
+lives = 3
 #walls of caves haev colors, white cave black cave.....
 # Starting Script
-print("""
-        You awake in the center of a crossroad
-        You can go north, east, south, or west
-        Some parts of this game will make it impossible to go back
-        Only one way is right
-        Choose carefully and goodluck!
-        """)
+#eat meet be healed
 
 # Cliff
 def cliff():
@@ -21,7 +17,7 @@ def cliff():
             """)
         cave()
 
-# Cave
+# Cave Entrance
 def cave():
         
         dir = input(prompt)
@@ -29,9 +25,9 @@ def cave():
 #  west
         if dir == "east":
             print("""
-                In front of you was a pit of lava
-                Unable to see, you fell in
-                and died
+                As you walk towards the heat it becomes significantly hotter
+                So hot that without being able to see if there's anywhere else to go,
+                You turn around
             """)
         elif dir == "north":
             print("""
@@ -50,10 +46,25 @@ def cave():
         elif dir == "west":
             print("""
                     You stepped into some weird liquid on the ground
-                    You had an epiphany and put the liquid on your eyes
-                    You can now see two dark paths ahead to the north and west
+                    The liquid has a 70% of healing your eyes and a 30% chance of killing you
+                    Type yes to use it or no to head back Cave Entrance
             """)
-            deeper_cave()
+            heal = input(prompt)
+            if heal == "yes":
+                if random.randint(1, 100) >= 30:
+                    print("""
+                        The liquid works!
+                        You can now see two paths ahead to the north and west
+                            """)
+                    deeper_cave()
+                else:
+                    print("""
+                        Oh no! The liquid starts to burn in your eyes
+                        You die a slow and miserable death
+
+                        Play again? yes/no
+                            """)
+                    play_again()
 
 # Deeper Cave
 def deeper_cave():
@@ -157,8 +168,27 @@ def woods():
                     This world did not recognize the direction you went
                     and kicked you out
             """)
+def play_again():
+    play_again = input(prompt)
+    if play_again == "yes":
+        game()
+    elif play_again == "no":
+        print("Goodbye!")
+    else:
+        print("Please enter a valid move")
+        play_again()
+
 #Game
-def game():
+def game(new_life = True):
+    if new_life == True:
+        print("""
+                You awake in the center of a crossroad
+                You can go north, east, south, or west
+                Some parts of this game will make it impossible to go back
+                Only one way is right
+                You have 3 lives
+                Choose carefully and goodluck!
+                """)
 
     dir = input(prompt)
 
@@ -169,6 +199,7 @@ def game():
                 luckily, you survive
                 unluckily, you lose your vision
                 """)
+        x = "blind"
         cliff()
     elif dir == "south":
         print("""
@@ -187,6 +218,6 @@ def game():
         print("""
                 Please enter a valid move
         """)
-        game()
+        game(new_life = False)
 
 game()
