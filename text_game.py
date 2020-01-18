@@ -3,10 +3,11 @@ from sys import exit
 prompt = "~> "
 valid_move = "\t\tPlease enter a valid move\n~> "
 
-# Starting Script
+# Starting Script EACH direction provides a way to win?
 #eat meet be healed
 # random directions until you can see
 # Spot where you heal eyes with a 80% chance of death. If this heals you and not the cannibals then you may go through a special quest
+####### NORTH ######################### NORTH ############################# NORTH ######################
 # Daves Cliff
 def daves_cliff():
     print("""
@@ -209,17 +210,9 @@ def new_life(lives = 2):
         else:
             game()
         
-
-def play_again():
-    play_again = input(prompt)
-    while True:
-        if play_again == "yes":
-            game()
-        elif play_again == "no":
-            print("\t\tGoodbye!")
-        else:
-            dir = input(valid_move)
-
+####### EAST ######################## EAST ############################# EAST ####################
+####### SOUTH ####################### SOUTH ############################ SOUTH ###################
+####### WEST ######################## WEST ############################# WEST ####################
 #Game
 def game():
     print("""
