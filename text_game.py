@@ -1,6 +1,5 @@
 import random
 prompt = "~> "
-lives = 3
 #walls of caves haev colors, white cave black cave.....
 # Starting Script
 #eat meet be healed
@@ -11,14 +10,14 @@ def cliff():
 
     if dir == "south":
         print("""
-            You make it into a cave and feel warmth coming from the east
+            You make it into The Swail Cave Entrance and feel warmth coming from the east
             To the south you hear whispering
             The west provides no notable sound or feeling
             """)
-        cave()
+        swail_cave()
 
-# Cave Entrance
-def cave():
+# Swail Cave Entrance
+def swail_cave():
         
         dir = input(prompt)
 
@@ -45,13 +44,14 @@ def cave():
             cannibal()
         elif dir == "west":
             print("""
-                    You stepped into some weird liquid on the ground
-                    The liquid has a 70% of healing your eyes and a 30% chance of killing you
-                    Type yes to use it or no to head back Cave Entrance
+                You stepped into some weird liquid on the ground
+                The liquid has a 70% of healing your eyes and a 30% chance of killing you
+                While blind you are unable to see what's ahead and must turn back
+                Type yes to use it or no to head back Swail Cave Entrance
             """)
             heal = input(prompt)
             if heal == "yes":
-                if random.randint(1, 100) >= 30:
+                if random.randint(1, 101) >= 90:
                     print("""
                         The liquid works!
                         You can now see two paths ahead to the north and west
@@ -64,7 +64,9 @@ def cave():
 
                         Play again? yes/no
                             """)
-                    play_again()
+                    new_life()
+            elif heal == "no":
+                cave()
 
 # Deeper Cave
 def deeper_cave():
@@ -168,6 +170,33 @@ def woods():
                     This world did not recognize the direction you went
                     and kicked you out
             """)
+
+def new_life(lives = 3, dead = False):
+    if dead == False:
+        lives -= 3
+        if lives == 0:
+            print("""
+                    Oh no! You lost all your lives.
+
+                    Play again? yes/no
+                    """)
+            new_life(dead = True)
+        else:
+            game()
+    else:
+        dir = input(prompt)
+            
+        if dir == "yes":
+            lives = 3
+            game()
+        elif dir == "no":
+            print("Goodbye!")
+        else:
+            print("""
+                    Please enter a valid move
+                    """)
+            new_life(dead = True)
+
 def play_again():
     play_again = input(prompt)
     if play_again == "yes":
@@ -181,12 +210,12 @@ def play_again():
 #Game
 def game(new_life = True):
     if new_life == True:
-        print("""
+        print(f"""
                 You awake in the center of a crossroad
                 You can go north, east, south, or west
                 Some parts of this game will make it impossible to go back
                 Only one way is right
-                You have 3 lives
+                You have khbj lives
                 Choose carefully and goodluck!
                 """)
 
@@ -199,7 +228,6 @@ def game(new_life = True):
                 luckily, you survive
                 unluckily, you lose your vision
                 """)
-        x = "blind"
         cliff()
     elif dir == "south":
         print("""
